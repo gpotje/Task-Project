@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: Task-Manager-API
+
+server:
+  servlet:
+    context-path: /api/v1/
