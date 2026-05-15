@@ -1,9 +1,7 @@
 package com.example.domain.entities;
 
 import com.example.domain.enuns.StatusTask;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -12,6 +10,7 @@ import java.util.Date;
 public class Task {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
@@ -19,4 +18,30 @@ public class Task {
     private Date createdAt;
 
     public Task() {}
+
+    public Task( String title, String description,StatusTask status, Date createdAt ) {
+        this.createdAt = createdAt;
+        this.status = status;
+        this.description = description;
+        this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
