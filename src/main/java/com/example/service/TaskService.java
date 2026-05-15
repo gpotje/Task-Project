@@ -1,13 +1,14 @@
 package com.example.service;
 
-import com.example.domain.dto.CreateTaskRequestDto;
-import com.example.domain.dto.CreateTaskResponseDto;
+import com.example.domain.dto.task.CreateTaskRequestDto;
+import com.example.domain.dto.CreateResponseDto;
 import com.example.domain.entities.Task;
 import com.example.domain.enuns.StatusTask;
 import com.example.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class TaskService {
@@ -18,20 +19,19 @@ public class TaskService {
         this.repository = repository;
     }
 
-    public CreateTaskResponseDto createTask(CreateTaskRequestDto dto){
+    public CreateResponseDto createTask(CreateTaskRequestDto dto){
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
 
+        String dataFormatada = LocalDateTime.now().format(formatter);
 
-        Task task = new Task(
+        Task taskResponse  = repository.save(new Task(
                 dto.getTitle(),
                 dto.getDescription(),
                 dto.getStatus() == null ? StatusTask.IN_PROGRESS : dto.getStatus(),
-                new Date());
+                dataFormatada));
 
-        System.out.println("=================================");
-        task.toString();
-        Task taskResponse  = repository.save(task);
-
-        return  new CreateTaskResponseDto(taskResponse.getId());
+        return new CreateResponseDto(taskResponse.getId());
     }
 
 

@@ -1,8 +1,10 @@
 package com.example.domain.entities;
 
 import com.example.domain.enuns.StatusTask;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -14,12 +16,16 @@ public class Task {
     private Long id;
     private String title;
     private String description;
+
+    @Enumerated(EnumType.STRING)
     private StatusTask status;
-    private Date createdAt;
+
+    @Column(name = "created_at")
+    private String  createdAt;
 
     public Task() {}
 
-    public Task( String title, String description,StatusTask status, Date createdAt ) {
+    public Task( String title, String description,StatusTask status, String  createdAt ) {
         this.createdAt = createdAt;
         this.status = status;
         this.description = description;

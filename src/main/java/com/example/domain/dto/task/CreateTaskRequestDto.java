@@ -1,4 +1,4 @@
-package com.example.domain.dto;
+package com.example.domain.dto.task;
 
 import com.example.domain.enuns.StatusTask;
 import jakarta.validation.constraints.NotBlank;

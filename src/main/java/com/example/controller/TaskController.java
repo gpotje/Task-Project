@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import com.example.domain.dto.CreateTaskRequestDto;
-import com.example.domain.dto.CreateTaskResponseDto;
+import com.example.domain.dto.task.CreateTaskRequestDto;
+import com.example.domain.dto.CreateResponseDto;
 import com.example.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<CreateTaskResponseDto> createTask(@RequestBody CreateTaskRequestDto dto){
-        return new ResponseEntity<CreateTaskResponseDto>(service.createTask(dto), HttpStatus.CREATED);
+    public ResponseEntity<CreateResponseDto> createTask(@RequestBody CreateTaskRequestDto dto){
+        return new ResponseEntity<CreateResponseDto>(service.createTask(dto), HttpStatus.CREATED);
     }
 }
