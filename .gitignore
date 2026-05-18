@@ -13,6 +13,7 @@ release.properties
 .settings/
 bin/
 
+
 # IntelliJ
 .idea
 *.ipr
@@ -42,5 +43,7 @@ nb-configuration.xml
 
 # Plugin directory
 /.quarkus/cli/plugins/
+/data/*.mv.db
+/data/*.trace.db
 /src/git.properties
 /src/main/resources/git.properties

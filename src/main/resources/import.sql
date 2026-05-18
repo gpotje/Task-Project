@@ -1,0 +1,1 @@
+INSERT INTO TB_TASK (ID,CREATED_AT,DESCRIPTION,TITLE,STATUS) VALUES(100,'18/05/26 15:23','etorno com a inconsistência de ausência de município','EDITAL] Ajustes envio e-mail inconsistência TCE (REFATORAÇÃO)','IN_PROGRESS')
