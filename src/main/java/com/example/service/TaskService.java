@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.domain.dto.task.CreateTaskRequestDto;
 import com.example.domain.dto.CreateResponseDto;
 import com.example.domain.dto.task.TaskDto;
+import com.example.domain.dto.task.UpdateStatusTaskDto;
 import com.example.domain.entities.Task;
 import com.example.domain.enuns.StatusTask;
 import com.example.repository.TaskRepository;
@@ -35,6 +36,22 @@ public class TaskService {
         }
 
         throw new RuntimeException("Task not found");
+    }
+
+    public CreateResponseDto UpdateStatusTask(UpdateStatusTaskDto dto){
+        Optional<Task> op = repository.findById(dto.getId());
+        Task task = new Task();
+
+        if(op.isPresent()){
+            task = op.get();
+        }else {
+            throw new RuntimeException("Task not found");
+        }
+
+        task.setStatus(dto.getStatusTask());
+        repository.save(task);
+
+        return new CreateResponseDto(task.getId());
     }
 
     public CreateResponseDto createTask(CreateTaskRequestDto dto){
