@@ -40,11 +40,17 @@ public class TaskController {
         return new ResponseEntity<>(service.findById(id),HttpStatus.OK);
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        return new ResponseEntity<>(service.deleteTask(id),HttpStatus.OK);
+    }
+
     @PatchMapping("{id}/status")
     public ResponseEntity<CreateResponseDto> findById(@PathVariable Long id, @RequestBody UpdateStatusRequestDto dto){
         UpdateStatusTaskDto update = new UpdateStatusTaskDto(id,dto.getStatus());
         return new ResponseEntity<>(service.UpdateStatusTask(update),HttpStatus.OK);
     }
+
 
 
 

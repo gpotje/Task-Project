@@ -54,6 +54,17 @@ public class TaskService {
         return new CreateResponseDto(task.getId());
     }
 
+    public String deleteTask(Long id){
+        Optional<Task> op = repository.findById(id);
+
+        if(op.isPresent()){
+            repository.delete(op.get());
+            return "Deleted task with success";
+        }
+            throw new RuntimeException("Task not found");
+
+    }
+
     public CreateResponseDto createTask(CreateTaskRequestDto dto){
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
