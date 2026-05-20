@@ -1,17 +1,15 @@
 package com.example.domain.dto.task;
 
-import com.example.domain.enuns.StatusTask;
-
-import java.util.Date;
+import com.example.domain.enuns.TaskStatus;
 
 public class TaskDto {
     private Long id;
     private String title;
     private String description;
-    private StatusTask status;
+    private TaskStatus status;
     private String createdAt;
 
-    public TaskDto(Long id, String title, String description, StatusTask status, String createdAt) {
+    public TaskDto(Long id, String title, String description, TaskStatus status, String createdAt) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,7 +29,7 @@ public class TaskDto {
         return description;
     }
 
-    public StatusTask getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 

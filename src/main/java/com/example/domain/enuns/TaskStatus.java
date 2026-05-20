@@ -1,6 +1,6 @@
 package com.example.domain.enuns;
 
-public enum StatusTask {
+public enum TaskStatus {
     PENDING,
     IN_PROGRESS,
     DONE;

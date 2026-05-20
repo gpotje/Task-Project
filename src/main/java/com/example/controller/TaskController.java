@@ -5,11 +5,8 @@ import com.example.domain.dto.CreateResponseDto;
 import com.example.domain.dto.task.TaskDto;
 import com.example.domain.dto.task.UpdateStatusRequestDto;
 import com.example.domain.dto.task.UpdateStatusTaskDto;
-import com.example.domain.entities.Task;
-import com.example.domain.enuns.StatusTask;
-import com.example.exception.TaskNotFoundException;
 import com.example.service.TaskService;
-import org.apache.coyote.Response;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +25,7 @@ public class TaskController {
     }
 
     @PostMapping
+    @Valid
     public ResponseEntity<CreateResponseDto> createTask(@RequestBody CreateTaskRequestDto dto){
         return new ResponseEntity<>(service.createTask(dto), HttpStatus.CREATED);
     }
@@ -49,6 +47,7 @@ public class TaskController {
     }
 
     @PatchMapping("{id}/status")
+    @Valid
     public ResponseEntity<CreateResponseDto> findById(@PathVariable Long id, @RequestBody UpdateStatusRequestDto dto){
         return new ResponseEntity<>(service.UpdateStatusTask(new UpdateStatusTaskDto(id,dto.getStatus())),HttpStatus.OK);
     }

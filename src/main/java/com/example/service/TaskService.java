@@ -5,7 +5,7 @@ import com.example.domain.dto.CreateResponseDto;
 import com.example.domain.dto.task.TaskDto;
 import com.example.domain.dto.task.UpdateStatusTaskDto;
 import com.example.domain.entities.Task;
-import com.example.domain.enuns.StatusTask;
+import com.example.domain.enuns.TaskStatus;
 import com.example.exception.TaskNotFoundException;
 import com.example.repository.TaskRepository;
 import org.springframework.stereotype.Service;
@@ -54,7 +54,7 @@ public class TaskService {
         Task taskResponse  = repository.save(new Task(
                 dto.getTitle(),
                 dto.getDescription(),
-                dto.getStatus() == null ? StatusTask.IN_PROGRESS : dto.getStatus(),
+                dto.getStatus() == null ? TaskStatus.IN_PROGRESS : dto.getStatus(),
                 dataFormatada));
 
         return new CreateResponseDto(taskResponse.getId());

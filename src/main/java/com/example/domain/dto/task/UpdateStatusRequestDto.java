@@ -1,17 +1,16 @@
 package com.example.domain.dto.task;
 
-import com.example.domain.enuns.StatusTask;
-import jakarta.validation.constraints.NotEmpty;
+import com.example.domain.enuns.TaskStatus;
 
 public class UpdateStatusRequestDto {
 
-    private StatusTask status;
+    private TaskStatus status;
 
-    public StatusTask getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
-    public void setStatus(StatusTask status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 

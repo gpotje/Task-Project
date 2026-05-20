@@ -1,11 +1,7 @@
 package com.example.domain.entities;
 
-import com.example.domain.enuns.StatusTask;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.example.domain.enuns.TaskStatus;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "tb_task")
@@ -18,14 +14,14 @@ public class Task {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private StatusTask status;
+    private TaskStatus status;
 
     @Column(name = "created_at")
     private String  createdAt;
 
     public Task() {}
 
-    public Task( String title, String description,StatusTask status, String  createdAt ) {
+    public Task(String title, String description, TaskStatus status, String  createdAt ) {
         this.createdAt = createdAt;
         this.status = status;
         this.description = description;
@@ -44,7 +40,7 @@ public class Task {
         return description;
     }
 
-    public StatusTask getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
@@ -52,7 +48,7 @@ public class Task {
         return createdAt;
     }
 
-    public void setStatus(StatusTask status) {
+    public void setStatus(TaskStatus status) {
         this.status = status;
     }
 
