@@ -7,7 +7,9 @@ import com.example.domain.dto.task.UpdateStatusRequestDto;
 import com.example.domain.dto.task.UpdateStatusTaskDto;
 import com.example.domain.entities.Task;
 import com.example.domain.enuns.StatusTask;
+import com.example.exception.TaskNotFoundException;
 import com.example.service.TaskService;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +43,14 @@ public class TaskController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
-        return new ResponseEntity<>(service.deleteTask(id),HttpStatus.OK);
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("{id}/status")
     public ResponseEntity<CreateResponseDto> findById(@PathVariable Long id, @RequestBody UpdateStatusRequestDto dto){
-        UpdateStatusTaskDto update = new UpdateStatusTaskDto(id,dto.getStatus());
-        return new ResponseEntity<>(service.UpdateStatusTask(update),HttpStatus.OK);
+        return new ResponseEntity<>(service.UpdateStatusTask(new UpdateStatusTaskDto(id,dto.getStatus())),HttpStatus.OK);
     }
 
 

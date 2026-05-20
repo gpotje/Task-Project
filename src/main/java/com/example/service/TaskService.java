@@ -6,6 +6,7 @@ import com.example.domain.dto.task.TaskDto;
 import com.example.domain.dto.task.UpdateStatusTaskDto;
 import com.example.domain.entities.Task;
 import com.example.domain.enuns.StatusTask;
+import com.example.exception.TaskNotFoundException;
 import com.example.repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -29,40 +30,19 @@ public class TaskService {
     }
 
     public TaskDto findById(Long id){
-        Optional<Task> op = repository.findById(id);
-
-        if(op.isPresent()){
-            return convertTaskToTaskDto(op.get());
-        }
-
-        throw new RuntimeException("Task not found");
+        return convertTaskToTaskDto(findByIdTask(id));
     }
 
     public CreateResponseDto UpdateStatusTask(UpdateStatusTaskDto dto){
-        Optional<Task> op = repository.findById(dto.getId());
-        Task task = new Task();
-
-        if(op.isPresent()){
-            task = op.get();
-        }else {
-            throw new RuntimeException("Task not found");
-        }
-
+        Task task = findByIdTask(dto.getId());
         task.setStatus(dto.getStatusTask());
         repository.save(task);
-
         return new CreateResponseDto(task.getId());
     }
 
-    public String deleteTask(Long id){
-        Optional<Task> op = repository.findById(id);
-
-        if(op.isPresent()){
-            repository.delete(op.get());
-            return "Deleted task with success";
-        }
-            throw new RuntimeException("Task not found");
-
+    public void delete(Long id){
+        Task task = findByIdTask(id);
+        repository.delete(task);
     }
 
     public CreateResponseDto createTask(CreateTaskRequestDto dto){
@@ -90,6 +70,14 @@ public class TaskService {
 
     private TaskDto convertTaskToTaskDto(Task task){
         return new TaskDto(task.getId(),task.getTitle(),task.getDescription(),task.getStatus(),task.getCreatedAt());
+    }
+
+    private Task findByIdTask(Long id){
+        Optional<Task> op = repository.findById(id);
+         if(op.isPresent()){
+            return op.get();
+        }
+        throw new TaskNotFoundException("");
     }
 
 }
