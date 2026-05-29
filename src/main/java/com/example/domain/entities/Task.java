@@ -2,6 +2,8 @@ package com.example.domain.entities;
 
 import com.example.domain.enuns.TaskStatus;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tb_task")
@@ -10,6 +12,8 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
+    @Size(min = 3, max = 100)
     private String title;
     private String description;
 

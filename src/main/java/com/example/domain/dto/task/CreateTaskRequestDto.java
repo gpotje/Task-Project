@@ -15,6 +15,20 @@ public class CreateTaskRequestDto {
     private TaskStatus status;
     private Date createdAt;
 
+    public CreateTaskRequestDto() {
+    }
+
+    public CreateTaskRequestDto(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public CreateTaskRequestDto(String title, String description, TaskStatus status) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+    }
+
     public String getTitle() {
         return title;
     }
