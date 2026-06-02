@@ -5,8 +5,11 @@ import com.example.domain.dto.CreateResponseDto;
 import com.example.domain.dto.task.TaskDto;
 import com.example.domain.dto.task.UpdateStatusRequestDto;
 import com.example.domain.dto.task.UpdateStatusTaskDto;
+import com.example.domain.entities.Task;
 import com.example.service.TaskService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +34,8 @@ public class TaskController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TaskDto>> listAll(){
-        return new ResponseEntity<>(service.listAll(),HttpStatus.OK);
+    public ResponseEntity<Page<Task>> listAll(Pageable pageable){
+        return new ResponseEntity<>(service.listAll(pageable),HttpStatus.OK);
     }
 
     @GetMapping("{id}")

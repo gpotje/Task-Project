@@ -8,6 +8,8 @@ import com.example.domain.entities.Task;
 import com.example.domain.enuns.TaskStatus;
 import com.example.exception.TaskNotFoundException;
 import com.example.repository.TaskRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,8 +27,8 @@ public class TaskService {
         this.repository = repository;
     }
 
-    public List<TaskDto> listAll(){
-        return convertListTaskToListTaskDto(repository.findAll());
+    public Page<Task> listAll(Pageable pageable){
+         return repository.findAll(pageable);
     }
 
     public TaskDto findById(Long id){
